@@ -9,6 +9,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
+import { DishProvider } from '../providers/dish/dish';
+import { LeaderProvider } from '../providers/leader/leader';
+import { PromotionProvider } from '../providers/promotion/promotion';
+import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-httpmsg';
+import { HttpModule } from '@angular/http';
+import { baseURL } from '../shared/baseurl';
+import { DishdetailPage } from '../pages/dishdetail/dishdetail';
 
 @NgModule({
   declarations: [
@@ -16,10 +23,12 @@ import { ContactPage } from '../pages/contact/contact';
     MenuPage,
     ContactPage,
     MyApp,
-    HomePage
+    HomePage,
+    DishdetailPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -28,12 +37,17 @@ import { ContactPage } from '../pages/contact/contact';
     AboutPage,
     MenuPage,
     ContactPage,
-    HomePage
+    HomePage,
+    DishdetailPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: 'BaseURL', useValue: baseURL },
+    DishProvider,
+    LeaderProvider,
+    PromotionProvider,
+    ProcessHttpmsgProvider
   ]
 })
 export class AppModule {}
